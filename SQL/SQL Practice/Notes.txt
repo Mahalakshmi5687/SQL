@@ -1,0 +1,609 @@
+DDL COMMANDS:
+To create database:
+Syntax: create Database <Databasename>
+EX:Create Database Test1
+
+To use database:
+Syntax: use <databsename>
+EX:use <databasename>
+
+To create table in database:
+syntax: create table <tablename>
+Ex:Create table TestTable
+ (
+	emp_id int,
+	last_name varchar(50) not null,
+	first_name varchar(50) not null,
+ )
+ 
+To Alter table:
+Alter table is used to:
+Add, delete, modify columns from existing table
+Add/Drop constraints on an existing table
+Syntax:
+alter table <table_name> add <column_name> <datatype>
+alter table <table_name> drop column <column_name>
+alter table <table_name> alter column <column_name> <datatype>
+Ex:
+ alter table TestTable add age int
+
+ alter table TestTable drop column age
+
+ alter table TestTable alter column emp_id char(10)
+
+Drop table:
+The Drop table statement is used to drop a table from selected database
+Syntax:drop table <table_name>
+Ex: drop table employee
+
+Various Constraints:
+*Constraints enforce rules on the table whenever rowa are inserted, updated and deleted form the table
+*Prevents the deletion of a table if there are dependencies from other tables
+*Define the constraints at column or table level
+*Constraints can be applied during creation of table or after table creation by using alter command 
+
+not null - specifies that a column must have some value
+unique - specifies that column must have unique values
+primary key - specifies a column or a set of columns that uniquely identifies a row. It does not allow null values
+Foreign key - Foreign key is a column(s) that references a column(s) of another table
+check - specifies a condition that must be satisfied by all the rowa in a table
+
+Creating Views:
+A view is a named, derived, virtual table. A view takes the output of a query and treats it as table
+
+
+DML COMMANDS:
+This language constiutes the statements that are used to manipulate with the data. It has commands like:
+Insert
+updated
+delete
+select
+
+Insert statements:
+Insert command is used to Insertdata/record into the database table
+Inserting values for the specific columns in the table.(Always include the columns which are not null)
+Syntax:Insert into <table-name> (fieldname1,fieldname2,...) values (value1,value2,..);
+
+"Insert-As-Select" statement:
+'Insert-As-Select' statement allows to insert into a table using the input from another table.
+Record from one table will be inserted in another table.
+
+
+update statements:
+Update statement updates/modify the existing data in the tables. Using these statements
+we can update the value of a single column or multiple columns in a single statement
+Updating single column
+Syntax:Update <table-name> set<field name>=<value> where <condition>
+Note:
+1.without where clause all the rows will get updated
+2.Updating multiple column [while updating more than one column, the column must be separated by comma operator]
+
+
+Delete statement:
+Delete commands helps to delete rows/records from database table. Delete statements can be executed with or without where conditions. 
+Execution of delete commands without where condition will remove all the records/rows from the table
+Syntax: Delete from <table-name> [where condition];
+
+
+Select statement:
+These statements help us to retrive from data table
+where condition is optional in select statements. Various operators can be used in where conditions for data retrieval
+Syntax:<field1,field2,...fieldn> from <table name> where <condition>
+
+select statement:Alias Name for a field
+using alias name for a field:
+Synatax:Select <col1><alias name 1>,<col2><alias name 2>from <tab1e>
+
+select statement: Distinct values
+Distinct values:
+Used to retrive unique values for a column. Multiple rows can have same values for a column, distinct keyword in select statement
+helps us to retrive unique rows for a column
+Syntax: select distinct<col2> from <table>
+
+Ordering Result:
+Order by:
+Used along with where clause to display the specified column in ascending order or descending order
+Default is ascending order
+Syntax:
+select [distinct]<column(s)>
+from <tab1e>
+[where <condition>]
+[order by <column(s) [asc|desc]>]
+
+Filtering:Logical Operators
+Logical operators(And,or and not)
+Used in where conditions to join more than two queries. used to combine the results of two or more conditions to produce single results
+And:
+Used to combine two conditions and it fetches the result which satisfy both the conditions
+or:
+Used to combine two or more conditions and it fetches the result which satisfy any one of the condition in OR statements
+Not:
+used to negate the conditions and it fetches opposite of the result which satisfy the condition. It is used in combination 
+with other keywords like NOT IN, NOT, Between etc
+
+Filtering: Comparision Operators
+(=,!=,<,>,>=,<=,like,between,in): comparision operator are used in where condition to fetch results from table
+
+Between Operator:
+The Between Operator is used to search for values that are within a set of values
+In:
+Fetches values from a set of literals. It is used to test whether or not a value is "in" the list of values provided after the keyword IN.
+The IN condition can be used with any datatype in SQL
+This condition is generally used when we want to check/fetch values from multiple values in single statement
+Comparision:
+>,=,<,>=
+
+Case Expression:
+Used as a type of IF-THEN-ELSE statement. CASE is used to provide if-then-else type of logic to SQL.
+Note: you cannot use simple case to test for null because it always uses the equals operator (=). That is because the condition null=null
+is not true consequently, a when null clause never applies. If the <common operand> is null, the else clause applies.
+Syntax:
+CASE column_name
+WHEN condition1 THEN result1
+WHEN condition2 THEN result2
+ELSE result
+END
+
+SQL Joins:
+*A join clause is used to fetch data from two or more data tables, based on join condition
+*Join clause is used to combine rows from one(Self-Join) or more tables, based on a related column(s) between them
+*In SQL server we have:
+Self-join
+Inner-join(equi-join,simple-join)
+Left-join
+Right-join
+Full Outer join
+Cross-join(cartesian product)
+
+Self-join:
+A table can be joined to itself in a Self-Join
+Syntax:
+select <column_list>
+from <table_name> t1
+join <table_name1> t2
+on t1.column_name=t2.column_name   
+
+Inner-join:
+The Inner-join fetches records that have matching values in both tables
+Syntax:
+select <column_list>
+from <table_name1> as t1
+INNER JOIN <table_name2> as t2
+on t1.column_name=t2.column_name
+
+Left-join:
+The LEFT OUTER join(LEFT JOIN) returns rows to the left(t1) even if there are no rows on the right(t2) of the join clause
+The result is NULL for rows on Right table, when there is no match
+Syntax:
+select <column_list>
+from <table_name1> as t1
+LEFT OUTER JOIN <table_name2> as t2
+on t1.column_name=t2.column_name
+
+Right-join:
+The RIGHT OUTER join(RIGHT JOIN) returns the rows to the right(t2) relation (table) even if there are no matching rows on the left(t1) relation (table)
+The result is NULL for rows on Left table, when there is no match
+Syntax:
+select <column_list>
+from <table_name1> as t1
+RIGHT OUTER JOIN <table_name2> as t2
+on t1.column_name=t2.column_name
+
+Full Outer join:
+The FULL OUTER join keyword return all records when there is a match in either left(t1) or right(t2) table records
+If there are rows in "t1" that do not have matches in "t2" or vice-versa, those rows will be listed as well
+Syntax:
+select <column_list>
+from <table_name1> as t1
+Full OUTER JOIN <table_name2> as t2
+on t1.column_name=t2.column_name
+
+Cross join:
+Displays all the rows and all the columns of both the tables
+This is also called Cartesian product
+Syntax:
+select <column_list>
+from <table_name1> as t1
+cross join <table_name2> as t2
+
+
+SQL Built-in Functions:
+*Built-in functions are used to calculate values and manipulate data. These functions can be used anywhere as expressions
+*Some common Built-in functions in SQL server:
+Conversion Functions
+Logical Functions
+Math Functions
+Aggregate Functions
+String Functions
+Date Functions
+
+Built-in Functions:
+MS SQL built-in functions take zero or more inputs and returns a value.
+Built-in Functions:
+*Gets system related information
+*Used for calculations
+*Manipulate input data
+
+Conversion Functions- Functions that support data type casting and converting
+Logical Functions- Scalar functions that perform logical operation
+Math Function- Scalar functions perform a calculation, usually based on input values that are provided as arguments,
+and return a numeric value
+Aggregate Functions- Aggregate functions perform a calculation on a set of values and return a single value.
+Expect for COUNT, aggregate functions ignore null values. Aggregate functions are frequently used with the GROUP BY clause of the 
+SELECT statement
+String Functions- Scalar functions perform an operation on a string input value and return a string or numeric value
+Date Functions- Functions that manipulate dates
+
+Conversion Functions:
+The conversion built-in functions are used to convert a expr from one data type to another
+
+Below return value of specified datatype on success throws error on failure
+CAST:
+Syntax: CAST(expr as datatype)
+CONVERT:
+Syntax: CONVERT(datatype, expr)
+Note: BOth functions can be used interchangeably in  most situations CAST is ANSI-SQL complaint while CONVERT is not
+PARSE:
+Syntax: PARSE(value as datatype)
+
+Below return value of specified datatype on success null on failure
+TRY_CAST:
+Syntax: TRY_CAST(expr as datatype)
+TRY_CONVERT:
+Syntax: TRY_CONVERT(datatype, expr)
+TRY_PARSE:
+Syntax: TRY_PARSE(value as datatype)
+
+Logical Functions:
+Logical functions can be used to display one of several values based on a logical conditions
+CHOOSE:
+Returns a specified index from a list of values. Return NULL, if index is 0 or greater than number of items
+Syntax: CHOOSE(index,val_1,val_2[, val_n])
+IIF:
+Returns one of two values, based on whether the Boolean expr evaluates to true or false
+Syntax: IIF(boolean_expr, true_value, false_value)
+
+Math Functions:
+Math functions can be used to calculate business and Engineering calculations
+ABS:
+Returns absolute (positive) value of the specified numeric expr
+Syntax: ABS(num_expr)
+RAND:
+Returns a psuedo-random float value from 0 to 1 (exclusive). Seed is optional value
+Syntax: RAND(seed)
+EXP:
+Returns the exponential value
+Syntax: EXP(float_expr)
+ROUND:
+Returns a numeric value, rounded to the specified lenght or precision
+Syntax: ROUND(num_expr, lenght)
+FLOOR:
+Returns the largest integer less than or equal to the specified numeric expr
+Syntax: FLOOR(num_expr)
+SIGN:
+Returns the positive(+1), zero(0), or negative(-1) sign of the specified expr
+Syntax: SIGN(num_expr)
+SQRT:
+Returns the square root of the specified float value
+Syntax: SQRT(float_expr)
+CEILING:
+Returns the smallest integer greater than, or equal to, the specified numeric expr
+Syntax: CEILING(num_expr)
+SQUARE:
+Returns the square of the specified float value
+Synatx: SQUARE(float_expr)
+POWER:
+Returns the value of the specified expr to the specified power
+Syntax: POWER(float_expr,y)
+
+Aggreagate Functions:
+Aggregate functions perform a calculation on a set of values and return a single value. With the exception of the count aggregate function,
+all other aggregate functions ignore NULL values. Aggregate functions are frequently used with the group by clause of the select statement
+AVG:
+Returns the average of the values in a group. NUll values are ignored.
+Syntax: AVG(expr)
+MIN:
+Returns the minimum value in the expr
+Syntax: MIN(expr)
+SUM:
+Returns the sum of all the values, or only the DISTINCT values, in the expr. SUM can be used with numeric columns only. 
+Null values are ignored.
+Syntax: SUM(expr)
+COUNT:
+Returns the number of items in a group. COUNT works like the COUNT BIG function. The only difference between the two functions is their
+return values. COUNT always returns an int data type value. COUNT_BIG always returns a bigint data type value.
+Syntax: COUNT()
+MAX:
+Returns the maximum value in the expr
+Syntax: MAX(expr)
+
+String Functions:
+The below scalar functions perform an operation on a string input value and return a string or numeric value
+When string functions are passed arguments that are not string values, the input type is implicitly converted to a text data type
+LTRIM:
+Returns a character expr after it removes leading blanks
+Syntax: LTRIM(char_expr)
+RTRIM:
+Returns a character string after truncating all trailing blanks
+Syntax: RTRIM(char_expr)
+CHAR:
+Converts an int ASCII code to a character
+Syntax: CHAR(int_expr)
+CHARINDEX:
+Searches an expression for another expression and returns its starting position if found
+Syntax: CHARINDEX(exprToFind, exprToSearch[,start_location])
+STR:
+Returns character data converted from numeric data
+Syntax: STR(expression)
+CONCAT:
+Return a string that is the result of concatenating two or more string values
+Syntax: CONCAT(str1,str2,..)
+REPLACE:
+Replaces all occurrences of a specified string value with another string value
+Syntax: REPLACE(string, pattern, replacement)
+SUBSTRING:
+REturns part of a character, text
+Syntax: SUBSTRING(expr, start, lenght)
+FORMAT:
+Returns a value formatted with the specified format and optional culture
+Syntax: FORMAT(value,format[,culture])
+LEFT:
+Returns the LEFT part of a character string with the specified number of characters
+Syntax: LEFT(expr, int)
+RIGHT:
+Returns the RIGHT part of a character string with the specified number of characters
+Syntax: RIGHT(expr, int)
+REVERSE:
+Returns the reverse order of a string value
+Syntax: REVERSE(string)
+UPPER:
+Returns a character expression with lowercase character data converted to uppercase
+Syntax: UPPER(string)
+LOWER: 
+Returns a character expression after converting uppercase character data to lowercase
+Syntax: LOWER(string)
+LEN:
+Returns the number of characters of the specified string expression, excluding trailing blanks
+Syntax: LEN(string)
+
+DATE & TIME FUnctions:
+Date and time functions are scalar functions that perform an operation on a data and time input value and returns either a string,
+numeric, or date and time value
+
+SYSDATETIME:
+Returns a datetime2(7) value that contains the date and time
+Syntax: SYSDATETIME()
+CURRENT_TIMESTAMP:
+Returns a datetime value that contains the date and time
+Syntax: CURRENT_TIMESTAMP
+DATEPART:
+Returns an integer that represents the specified datepart of the specified date
+Syntax: DATEPART(datepart, date)
+DAY/MONTH/YEAR:
+Returns an integer that represents the day/month/year part of the specified date
+Syntax: DAY(date)/MONTH(date)/YEAR(date)
+DATEDIFF:
+Returns the number of date or time datepart boundaries that are crossed between two specified dates
+Syntax: DATEDIFF(datepart, startdate, enddate)
+DATEADD:
+Returns a new datetime value by adding an interval to the specified datepart of the speccified date
+DATEADD(datepart, number, date)
+
+--custom functions
+--groupby is used with aggregate functions
+select employeeID, address, count(*) from emp
+group by Address, employeeID
+
+
+select address, count(*) from emp
+group by Address
+
+select * from Employee
+
+select job, count(*) from employee
+group by job
+
+--having clause
+--we cannot use where clause with aggregate functions
+--if it is individually records we can use where clause
+--if it is summarized records we cannot use where clause instead we can use having clause
+--having clause is used with group by clause in which group by summarizes the records
+
+select job, count(*) from employee
+group by job
+having min(salary) >20000
+
+Stored Procedure:
+A stored Procedure is a set of sql statements with a name, that has been created and stored in the database
+Stored Procedure can be defined as the set of logical group of SQL statements which are grouped to perform a specfic task
+Like other programming constructs they can:
+*Accept input parameters
+*Return multiple values(out parameters)
+*Contain programming statements
+*Can call other stored procedures/functions
+*Returns status to indicate success or failure
+
+syntax: 
+CREATE[OR ALTER] PROCEDURE
+schema_name.procedure_name(
+@parameter_name as
+parameter_data_type[OUT])
+AS
+BEGIN
+<SQL STATEMENTS/COMPUTATIONS>
+END;
+
+Note: 
+Use ALTER instead of CREATE to make changes in the procedures
+
+Strored procedure: Benifits
+Reduced server/client network traffic:
+All commands in a procedure are executed as a single batch of code
+Stronger security:
+The EXECUTE AS can be specified to enable impersonating another user to perform certain db tasks without providing direct permission
+to the procedure
+Reuse of code:
+The code (procedure) can be called from other procedures
+Easier maintenance:
+Changes need to be done within stored procedure which handles all db operations and no changes are required in client applications
+Improved performance:
+All procedures by default are compiled in the database the first time it is executed and maintains the execution plan for subsequent calls
+
+User Defined Functions(UDF):
+Like functions in programming languages, User Defined Functons are compact pieces of Transact SQL code, which can accept parameters, perform 
+complex calculation and return either a value, or a table
+Scalar Valued Function:
+A scalar value function is used to return the single value only like integers or may be timestamp
+Table Valued Function:
+A table valued function is used for any number of the rows set values. It is useful in the case of the returning multiple rows set 
+at the same time
+
+All procedures by default are compiled in the database the first time it is executed and maintains the execution plan for subsequent calls
+
+UDF:Scalar Function
+Scalar functions return a single data value of the type defined in the RETURNS clause
+No function body is required for an inline Scalar function
+When multi statements need to be provided within BEGIN-END block
+Syntax:
+CREATE[OR ALTER] FUNCTION schema_name.
+function_name(@parameter_name AS 
+parameter_data_type)
+RETURNS return_data_type
+AS
+BEGIN
+<SQL statements/computation>
+RETURN scalar_value;
+END;
+
+UDF:Inline Table-Valued Function
+Inline table valued functions are a subset of user-defined functions that return a table data type 
+Inline functions can be used to achieve the functionality of parameterized views Inline table valued functions 
+can be used to support parameters in the search conditions specified in WHERE clause
+
+Inline user-defined functions follow these rules:
+The RETURNS clause contains only the keyword table. Format need not be defined for return value
+There is no function_body delimited by BEGIN and END
+The RETURN clause contains a single SELECT statement in parantheses
+The table-valued function accepts only constants or @local_variable arguments
+
+Syntax:
+CREATE[OR ALTER] FUNCTION schema_name.
+function_name(@parameter_name AS 
+parameter_data_type)
+RETURNS TABLE
+AS
+BEGIN
+RETURN <SQL statements>;
+END;
+
+UDF:Multi-Statement Table-Valued Function
+User-defined functions that return a table data type can be powerful alternatives to views
+A table-valued user-defined function can be used where table or view expression are allowed in Transact-SQL queries
+views are limited to a single SELECT statement, user-defined functions can contain additional statements
+
+In a table-valued user-defined function:
+The RETURNS clause defines the format of the table. The scope of the local return variable name is local within the function
+The Transact-SQL statements in the function body build and insert rows into the return variable defined by the RETURNS clause
+The rows inserted into the variable are returned as the tabular output of the function
+
+Syntax:
+CREATE[OR ALTER] FUNCTION schema_name.
+function_name(@parameter_name AS 
+parameter_data_type)
+RETURNS @return_variable TABLE <table_type_definition>
+AS
+BEGIN
+<SQL statements/COMPUTATION>
+RETURN;
+END;
+
+User Defined Functions (UDF): Benefits
+Modular Programming:
+Functions are stored in db and can be call any number of times in your programming
+Faster Execution:
+Like stored procedures, all functions are compiled in the database and maintains the execution plan for subsequent calls
+Reduce network traffic:
+A complex constraint that cannot be expressed as a single scalar expression can be written in a function and can be invoked form
+WHERE clause
+
+Triggers in SQL:
+What are Triggers?
+when do we use Triggers?
+Syntax of a trigger?
+Example of a trigger?
+Operations in triggers?
+What are the types of SQL Server Triggers?
+Before Insert and after Insert?
+Advantages and Disadvantages of Triggers?
+
+What are Triggers?
+A trigger in SQL runs automatically in response to specific events on a given table.
+when do we use Triggers?
+When we need to carry out specific actions automatically in particular desirable conditions,
+triggers will be useful.
+Syntax of a trigger?
+CREATE[OR ALTER] TRIGGER schema_name.trigger_name
+on(table|view)
+FOR|AFTER|INSTEAD OF
+[INSERT][,][UPDATE][,][DELETE]
+AS
+sql_statement
+
+Operations in triggers?
+Drop trigger:
+DROP Trigger trigger_name
+
+Display a trigger:
+Show triggers;
+every trigger in specific database:
+show triggers in database_name
+
+What are the types of SQL Server Triggers?
+DDL triggers
+DML triggers
+Logon triggers
+
+Advantages of triggers:
+Imposing security approvals on database tables
+verifying the accuracy of data
+Preventing fraudulent exchanges
+Deal with database layer failures
+Examining changes to data in tables
+
+Disadvantages of triggers:
+triggers are only able to offer extended validations
+triggers may raise the databases overhead
+may not be invisible to the client apps
+
+
+What are Triggers?
+Triggers:
+Definition:
+Triggers are statements that are executed automatically in the order of occurance
+of any event.
+It is executed whenever there is any change or modification in database
+It will execute if any of the operations is performed in database. It might be-
+DML- Data Manipulation Language(insert|update|delete)
+DDL- Data Definition Language (create|alter|drop)
+LogOn- It is executed in order to occurence of LogOn event
+
+Real-life Examples:
+A kid starts crying while seeing any emotional scene in a movie
+A person starts running when he sees a lion chasing him
+
+Practical example in Database:
+Applying a trigger on database to send a confirmation mail to flight passengers
+
+Synatx:
+CREATE[OR ALTER] TRIGGER schema_name.trigger_name
+on(table|view)
+FOR|AFTER|INSTEAD OF
+[INSERT][,][UPDATE][,][DELETE]
+AS
+sql_statement
+
+A trigger is a special kind of stored procedure that automatically executes when an event 
+occurs in the database server. DML triggers execute when a user tries to modify
+data through a data manipulation language(DML) event.
+DML events are INSERT, UPDATE, or DELETE statements on a table or view
+
