@@ -31,6 +31,41 @@ Ex:
 
  alter table TestTable alter column emp_id char(10)
 
+Step 1: Create a Table
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Step 2: Add a Constraint Using ALTER TABLE
+Let's say we want to add a CHECK constraint to ensure Age is greater than 18.
+
+ALTER TABLE Employees
+ADD CONSTRAINT CHK_Age CHECK (Age > 18);
+Step 3: Drop the Constraint Using ALTER TABLE
+To drop the CHECK constraint, we first need to know its name. If we named it CHK_Age, we can drop it using:
+
+ALTER TABLE Employees
+DROP CONSTRAINT CHK_Age;
+
+Step 1: Create a Table Without a Primary Key
+CREATE TABLE Employees (
+    EmployeeID INT,
+    Name VARCHAR(100) NOT NULL,
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+
+Step 2: Add a Primary Key Using ALTER TABLE
+ALTER TABLE Employees
+ADD CONSTRAINT PK_Employee PRIMARY KEY (EmployeeID);
+
+Step 3: Drop the Primary Key Using ALTER TABLE
+ALTER TABLE Employees
+DROP CONSTRAINT PK_Employee;
+
 Drop table:
 The Drop table statement is used to drop a table from selected database
 Syntax:drop table <table_name>
